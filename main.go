@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
+	"log"
 
 	"github.com/graphql-go/graphql"
 )
@@ -80,7 +81,7 @@ func executeQuery(query string, schema graphql.Schema) *graphql.Result {
 		RequestString: query,
 	})
 	if len(result.Errors) > 0 {
-		fmt.Printf("wrong result, unexpected errors: %v", result.Errors)
+		log.Printf("wrong result, unexpected errors: %v", result.Errors)
 	}
 	return result
 }
@@ -89,7 +90,6 @@ func main() {
 	port := os.Getenv("PORT")
 	if port == "" {
 		log.Fatal("$PORT must be set")
-		port = '8080'
 	}
 	
 	_ = importJSONDataFromFile("data.json", &data)
@@ -99,8 +99,8 @@ func main() {
 		json.NewEncoder(w).Encode(result)
 	})
 
-	fmt.Println("Now server is running on port %s", PORT)
-	fmt.Println("Test with Get : curl -g 'http://localhost:%s/graphql?query={user(id:\"1\"){name}}'", PORT)
+	log.Println("Now server is running on port %s", PORT)
+	log.Println("Test with Get : curl -g 'http://localhost:%s/graphql?query={user(id:\"1\"){name}}'", PORT)
 	http.ListenAndServe(":" + PORT, nil)
 }
 
@@ -109,13 +109,13 @@ func importJSONDataFromFile(fileName string, result interface{}) (isOK bool) {
 	isOK = true
 	content, err := ioutil.ReadFile(fileName)
 	if err != nil {
-		fmt.Print("Error:", err)
+		log.Print("Error:", err)
 		isOK = false
 	}
 	err = json.Unmarshal(content, result)
 	if err != nil {
 		isOK = false
-		fmt.Print("Error:", err)
+		log.Print("Error:", err)
 	}
 	return
 }
