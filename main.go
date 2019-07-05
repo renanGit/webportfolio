@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"net/http"
 	"os"
@@ -99,9 +98,9 @@ func main() {
 		json.NewEncoder(w).Encode(result)
 	})
 
-	log.Println("Now server is running on port %s", PORT)
-	log.Println("Test with Get : curl -g 'http://localhost:%s/graphql?query={user(id:\"1\"){name}}'", PORT)
-	http.ListenAndServe(":" + PORT, nil)
+	log.Println("Now server is running on port %s", port)
+	log.Println("Test with Get : curl -g 'http://localhost:%s/graphql?query={user(id:\"1\"){name}}'", port)
+	http.ListenAndServe(":" + port, nil)
 }
 
 //Helper function to import json from file to map
