@@ -1,0 +1,33 @@
+[
+  {
+    "model": "example.actor",
+    "pk": 1,
+    "fields": {
+      "name": "Michael B. Jordan"
+    }
+  },
+  {
+    "model": "example.actor",
+    "pk": 2,
+    "fields": {
+      "name": "Sylvester Stallone"
+    }
+  },
+  {
+    "model": "example.countryorigin",
+    "pk": 1,
+    "fields": {
+      "country": "USA"
+    }
+  },
+  {
+    "model": "example.movie",
+    "pk": 1,
+    "fields": {
+      "title": "Creed",
+      "actors": [1, 2],
+      "country_origin": 1,
+      "year": "2015"
+    }
+  }
+]

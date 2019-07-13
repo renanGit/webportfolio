@@ -1,1 +1,1 @@
-web: bin/web_be
+web: gunicorn gettingstarted.wsgi --log-file -
